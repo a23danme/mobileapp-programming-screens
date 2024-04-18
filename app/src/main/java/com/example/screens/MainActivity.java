@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 // Start the SecondActivity
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                 intent.putExtra("name", "Daniel"); // Optional
-                intent.putExtra("age", "24"); // Optional
+                intent.putExtra("age", 24);  // Optional
                 startActivity(intent);
             }
         });
