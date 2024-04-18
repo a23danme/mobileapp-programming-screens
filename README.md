@@ -1,34 +1,45 @@
 
 # Rapport
-
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+Skapade en till activity genom klicka app>New>activity. Fick problem med gradle men
+la till i gradle.build och det funkade då. Gjorde en Button som sedan med hjälp av
+clicklistener och startactivity kunde starta den nya activityn. La sedan till Intent med data som
+name och age. Dessa visades sedan genom att jag skapade en TextView som displayade datan.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+I gradle.build
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.activity:activity:1.1.0'
+    
+   I MainActivity2 (nya activityn) 
+        @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+
+        TextView TextviewForNameAndAge =findViewById(R.id.TextviewForNameAndAge);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String name = extras.getString("name");
+            int age = extras.getInt("age");
+
+            String displayText = "Name: " + name + "\nAge: " + age;
+            TextviewForNameAndAge.setText(displayText);
+        }
     }
-}
+    
+   I Main.Acitvity
+           Button startMainActivity2= findViewById(R.id.button);
+        startMainActivity2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start the SecondActivity
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                intent.putExtra("name", "Daniel"); // Optional
+                intent.putExtra("age", 24);  // Optional
+                startActivity(intent);
+            }
+        });
 ```
 
 Bilder läggs i samma mapp som markdown-filen.
